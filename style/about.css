@@ -7,13 +7,48 @@
 	background: url('img/about-hover.png');
 	color: #76AEDD;
 }
-.content-col-left{
-	display: inline-block;
-	width: 30%;
-	margin: 2%;
+.content{
+	direction: rtl;
+	display: inline-grid;
 }
 .content-col-right{
 	display: inline-block;
-	width: 50%;
+	width: 60%;
+	height: 300px;
 	margin: 2%;
+	margin-left: 0;
+	border-style: solid;
+	border-color: silver;
+	border-width: 1px;
+	vertical-align:top;
+}
+.content-col-left{
+	display: inline-block;
+	width: 30%;
+	height: 300px;
+	margin: 2%;
+	border-style: solid;
+	border-color: silver;
+	border-width: 1px;
+	vertical-align:top;
+}
+#khabarname{
+	background-color: blue;border-radius: 2%;border-color:blue;box-shadow: 0px 10px 30px #7B808C;color: white;
+	text-align: center;
+}
+.email{
+	border-radius: 20px;
+	border:none;
+	margin: 25px;
+	width: 200px;
+	height: 25px;
+	color: blue;
+}
+.join-btn{
+	border:none;
+	border-radius: 20px;
+	background-color: black;
+	color: white;
+	height: 35px;
+	width: 100px;
 }

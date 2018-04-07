@@ -5,6 +5,8 @@
 body{
 	font-family: yekan;
 	margin: 0;
+	color: #6E727D;
+	font-size: 90%;
 }
 .search {
   /*width: 100%;*/
@@ -74,7 +76,7 @@ a:hover{
 	border-color: silver;
 }
 .block_button:hover{
-	box-shadow: 2px 2px 2px #76AEDD;
+	box-shadow: 0px 0px 4px #76AEDD;
 }
 .block_button span{
 	display: block;
