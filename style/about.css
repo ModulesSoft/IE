@@ -1,0 +1,19 @@
+#about{
+	background: url('img/about-hover.png');	
+	height: 120px;
+	width: 120px;
+}
+#about:hover{
+	background: url('img/about-hover.png');
+	color: #76AEDD;
+}
+.content-col-left{
+	display: inline-block;
+	width: 30%;
+	margin: 2%;
+}
+.content-col-right{
+	display: inline-block;
+	width: 50%;
+	margin: 2%;
+}

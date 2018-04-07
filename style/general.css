@@ -1,0 +1,153 @@
+@font-face {
+    font-family: yekan;
+    src: url('font/Yekan.ttf');
+}
+body{
+	font-family: yekan;
+	margin: 0;
+}
+.search {
+  /*width: 100%;*/
+  position: relative
+}
+.searchTerm {
+  float: left;
+  width: 100%;
+  border: 3px solid #00B4CC;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+
+.searchButton {
+  position: absolute;  
+  right: 97%;
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.navbar-content{
+	display: inline-block;text-decoration: none;color: silver;margin-left: 2%
+}
+.btnborder {
+display: inline-block;
+border-style: solid;
+border-radius: 20px;
+border-color: silver;
+background-color: silver;
+padding: 5px 30px 5px 30px;
+}
+
+.abtn {
+	text-decoration: none;
+	color: white;
+}
+a{
+	text-decoration: none;
+	color: silver;
+}
+a:hover{
+	font-weight: bold;
+}
+.block,.navbar{
+	direction: rtl;
+}
+.block_button{
+	display: inline-block;
+	width: 120px;
+	height: 150px;
+	padding-right: 40px;
+	padding-left: 40px;
+	margin: 30px;
+	border-style: solid;
+	border-radius: 10px;
+	border-width: 1px;
+	border-color: silver;
+}
+.block_button:hover{
+	box-shadow: 2px 2px 2px #76AEDD;
+}
+.block_button span{
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding-top: 120px;
+}
+#about{
+	background: url('img/about.png');	
+	height: 120px;
+	width: 120px;
+}
+#about:hover{
+	background: url('img/about-hover.png');
+	color: #76AEDD;
+}
+#contact{
+	background: url('img/contact.png');	
+	height: 120px;
+	width: 120px;
+}
+#contact:hover{
+	background: url('img/contact-hover.png');
+	color: #76AEDD;
+}
+#return{
+	background: url('img/return.png');	
+	height: 120px;
+	width: 120px;
+}
+#return:hover{
+	background: url('img/return-hover.png');
+	color: #76AEDD;
+}
+#footer{
+	background-color: silver;
+	width: 100%;
+	position: absolute;
+	direction: rtl;
+}
+.footer-container{
+	padding:10px 150px 10px 150px;
+	display: inline-flex;
+}
+.footer-col{
+	width: 20%;
+	display: inline-block;
+	margin: 2%;
+}
+#facebook{
+	background: url('img/facebook.png');
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+}
+#twitter{
+	background: url('img/twitter.png');
+	width: 50px;
+	height: 50px;
+	display:inline-block;
+}
+#gplus{
+	background: url('img/gplus.png');
+	width: 50px;
+	height: 50px;
+	display:inline-block;
+}
+#facebook:hover{
+	background: url('img/facebook-hover.png');
+}
+#twitter:hover{
+	background: url('img/twitter-hover.png');
+}
+#gplus:hover{
+	background: url('img/gplus-hover.png');
+}
