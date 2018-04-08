@@ -1,0 +1,46 @@
+#contact{
+	background: url('img/contact-hover.png');	
+	height: 120px;
+	width: 120px;
+}
+#contact:hover{
+	background: url('img/contact-hover.png');
+	color: #76AEDD;
+}
+.connection{
+float: right; margin-right: 10px;width: 200px;
+}
+.red-box{
+	background-color: #D85A72;
+	color: white;
+	border-color: #7A7A7A;
+	border-radius: 5px;
+	box-shadow: 0px 0px 4px silver;
+	height: 70px;
+	margin-left : 12%;
+}
+.red-box p{
+	text-align: right;
+	padding: 10px;
+	width : 900px;
+}
+
+
+#facebook{
+	background: url('img/facebook-hover.png');
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+}
+#twitter{
+	background: url('img/twitter-hover.png');
+	width: 50px;
+	height: 50px;
+	display:inline-block;
+}
+#gplus{
+	background: url('img/gplus-hover.png');
+	width: 50px;
+	height: 50px;
+	display:inline-block;
+}

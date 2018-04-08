@@ -8,17 +8,28 @@ body{
 	color: #6E727D;
 	font-size: 90%;
 }
+
+hr {
+	border: none;
+    height: 1px;
+    color: #D9DEEC; /* old IE */
+    background-color: #D9DEEC; /* Modern Browsers */
+}
+.vertical-line{
+	border-left: 1px solid silver;
+    height: 65px;
+}
 .search {
   /*width: 100%;*/
   position: relative
 }
 .searchTerm {
   float: left;
-  width: 100%;
-  border: 3px solid #00B4CC;
+  width: 120%;
+  border: 2px solid silver;
   padding: 5px;
   height: 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   outline: none;
   color: #9DBFAF;
 }
@@ -26,14 +37,15 @@ body{
 
 .searchButton {
   position: absolute;  
-  right: 97%;
+  right: 90%;
   width: 40px;
   height: 36px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
+  border: 2px solid silver;
+  background: white;
   text-align: center;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 7px;
+  border-right: none;
   cursor: pointer;
   font-size: 20px;
 }
