@@ -44,3 +44,50 @@ float: right; margin-right: 10px;width: 200px;
 	height: 50px;
 	display:inline-block;
 }
+.contact-form{
+	text-align: right;
+	color : blue;
+	margin-left: 280px;
+	width: 800px;
+	height: 400px;
+	box-shadow: 0px 30px 40px silver;
+}
+.form-element{
+	display: inline-block;
+	margin-right: 5%;
+	font-size: 80%;
+}
+.form-element input{
+	border-radius: 20px;
+	width: 200px;
+	border-color: silver;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #DAE5F0;
+	height: 30px;
+}
+.form-element textarea{
+	border-radius: 20px;
+	width: 650px;
+	height: 150px;
+	border-color: silver;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #DAE5F0;
+	padding: 2%;
+	margin:2%;
+	/*margin-bottom: 100px;*/
+	resize: none;
+}
+.contact-form button{
+	border-radius: 20px;
+	color: blue;
+	border-style: solid;
+	border-color: blue;
+	width: 200px;
+	height: 30px;
+	background-color: white;
+	border-width: 1px;
+	margin-left: 8%; 
+	float:  left;
+}
