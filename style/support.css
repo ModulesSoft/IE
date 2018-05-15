@@ -1,0 +1,20 @@
+.support-closed{
+    position: fixed;
+    bottom: 0px;
+    right: 10px;
+    background-color:#4058de;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding:2px 10px 0 10px;
+}
+.support-closed img{
+    width: 40px;
+    float: right;
+    display: inline-block;
+}
+.support-closed p{
+    float: left;
+    display: inline-block;
+    margin: 10px;
+    color: #D9DEEC;
+}
