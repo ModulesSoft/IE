@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style\support.css">
+<script src="js\support.js"></script>
+
 <link rel="stylesheet" type="text/css" href="style\general.css">
 <link rel="stylesheet" type="text/css" href="style\return.css">
 <html>
@@ -127,6 +130,34 @@
 <p>
 تمامی حقوق این سایت متعلق به دانشگاه امیرکبیر بوده و هرگونه استفاده از منابع و طراحی های این سایت توسط نهادی خارج از دانشگاه با پیگرد قانونی همراه خواهد بود.
 </p>
+		</div>
+	</div>
+
+
+	<div id="support-closed" class="support-closed">
+		<a onclick="openChat();">
+			<img src="style\img\support-closed.png">
+			<p>پشتیبانی آنلاین</p>
+		</a>
+	</div>
+
+	<div id="support-open" class="support-open">
+		<button onclick="closeChat();">_</button>
+		<img id="support-image" class="supporter" src="">
+		<div class="header">
+			<h3 style="margin-bottom: -10px">پشتیبان بخش فروش</h3>
+			<p id="support-name"></p>
+		</div>
+		<div class="chat">
+			<div id="messages">
+			</div>
+			<div class="input">
+				<div style="background-color: #FFF;border-radius: 10px;height: inherit">
+					<input id="text" type="text" placeholder="متن پیام به پشتیبانی...">
+					<button onclick="send();"><img src="style\img\send.png" style="width: 25px;margin-right: -4px">
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

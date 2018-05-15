@@ -9,7 +9,7 @@
 }
 .content{
 	direction: rtl;
-	display: inline-grid;
+	/*display: inline-grid;*/
 }
 .content-col-right{
 	display: inline-block;
