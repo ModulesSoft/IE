@@ -166,18 +166,25 @@
 
     <div id="support-open" class="support-open">
         <button onclick="closeChat();">_</button>
-        <img class="supporter" src="style\img\u3f.jpg" style="float: right;">
+        <img class="supporter" src="style\img\u3f.jpg">
         <div class="header">
-        <h3 style="margin-bottom: -10px">پشتیبان بخش فروش</h3>
-        <p>یوسف فتورائی</p>
+            <h3 style="margin-bottom: -10px">پشتیبان بخش فروش</h3>
+            <p>یوسف فتورائی</p>
         </div>
-        <div class="chat">asdasdasd
-                <div class="input">
-                    <div style="background-color: #FFF;border-radius: 10px;height: inherit">
-                    <input type="text" placeholder="متن پیام به پشتیبانی...">
-                    <button onclick="send();"><img src="style\img\send.png" style="width: 25px;margin-right: -4px"></button>
-                    </div>
+        <div class="chat">
+            <div id="messages">
+                <div class="response">
+                    <img class="message-image" src="style\img\u3f.jpg">
+                    <div class="message-text"><p>سلام چطور میتونم کمکتون کنم؟</p></div>
                 </div>
+            </div>
+            <div class="input">
+                <div style="background-color: #FFF;border-radius: 10px;height: inherit">
+                    <input id="text" type="text" placeholder="متن پیام به پشتیبانی...">
+                    <button onclick="send();"><img src="style\img\send.png" style="width: 25px;margin-right: -4px">
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
