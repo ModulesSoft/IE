@@ -6,7 +6,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding:2px 10px 0 10px;
-    display: none;
+    /*display: none;*/
 }
 .support-closed img{
     width: 40px;
@@ -29,7 +29,7 @@
     padding:2px 0px 2px 0px;
     height: 400px;
     width: 300px;
-    /*display: none;*/
+    display: none;
 }
 
 .support-open .header{
@@ -64,7 +64,7 @@
 
 .message{
     float: left;
-    /*display: inline-block;*/
+    display: inline-block;
     /*height: 45px;*/
     margin-bottom: 10px;
 }
