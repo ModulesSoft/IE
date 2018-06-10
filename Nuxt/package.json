@@ -1,0 +1,32 @@
+{
+  "name": "clothster",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "Yousef <yousef.fatouraa@aut.ac.ir>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/vue-fontawesome": "0.0.23",
+    "@nuxtjs/font-awesome": "^1.0.3",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "install": "^0.11.0",
+    "nuxt": "^1.0.0",
+    "vue-agile": "^0.3.7"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-vue": "^4.0.0"
+  }
+}
