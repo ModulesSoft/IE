@@ -65,6 +65,9 @@ float: right; margin-right: 10px;width: 200px;
 	border-width: 1px;
 	background-color: #DAE5F0;
 	height: 30px;
+	padding-right: 15px;
+//	padding-left: 15px;
+	direction: rtl;
 }
 .form-element textarea{
 	border-radius: 20px;
@@ -78,6 +81,7 @@ float: right; margin-right: 10px;width: 200px;
 	margin:2%;
 	/*margin-bottom: 100px;*/
 	resize: none;
+	direction: rtl;
 }
 .contact-form button{
 	border-radius: 20px;
@@ -90,4 +94,5 @@ float: right; margin-right: 10px;width: 200px;
 	border-width: 1px;
 	margin-left: 8%; 
 	float:  left;
+	cursor:pointer;
 }

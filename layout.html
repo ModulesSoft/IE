@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style\support.css">
+<script src="js\support.js"></script>
+
+<link rel="stylesheet" type="text/css" href="style\general.css">
+<link rel="stylesheet" type="text/css" href="style\return.css">
+
+<html>
+<head>
+    <title>about us</title>
+</head>
+<body>
+<div id="container"  style="margin:10%;margin-top: 2%">
+
+    <div id="brand" align="center">
+        <div class="search" style="float:left;display: inline-block;">
+            <input class="searchTerm" type="text" placeholder="&#128269;" style="font-weight: bold;" />
+            <!-- <button type="submit" class="searchButton">
+                <i class="fa fa-search">&#128269;</i>
+             </button> -->
+        </div>
+        <div id="brand_name" style="display: inline-block;margin-top: -20px">
+            <a href="#" style="text-decoration:none; color: silver;font-size: 30px">Clothster</a>
+        </div>
+        <div id="login_register" style="float: right;display: inline-block;">
+            <div class="btnborder">
+                <a href="#" class="abtn" >login</a>
+            </div>
+            <div class="btnborder">
+                <a href="#" class="abtn">register</a>
+            </div>
+        </div>
+    </div>
+    <div class="navbar" align="center" style="padding-top: 20px; margin-left:10%;margin-right: 10%;">
+        <a href="#" class="navbar-content">مردانه</a>
+        <a href="#" class="navbar-content">زنانه</a>
+        <a href="#" class="navbar-content">بچگانه</a>
+        <a href="#" class="navbar-content">ورزشی</a>
+        <a href="#" class="navbar-content">تخفیف ها</a>
+        <a href="#" class="navbar-content">برندها</a>
+    </div>
+
+    <div id="content">
+        {{ message }}
+    </div>
+
+<div id="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <strong>خدمات مشتریان</strong>
+            <p>سوالات متداول</p>
+            <p>بازگرداندن کالا</p>
+            <p>شرایط استفاده</p>
+            <p>حریم شخصی</p>
+        </div>
+        <div class="footer-col">
+            <strong>اطلاعات ما</strong>
+            <p>درباره ما</p>
+            <p>تماس باما</p>
+        </div>
+        <div class="footer-col">
+            <strong>به ما در رسانه های اجتماعی بپیوندید</strong>
+            <br>
+            <a href="#"><div id="facebook"></div></a>
+            <a href="#"><div id="twitter"></div></a>
+            <a href="#"><div id="gplus"></div></a>
+            <a href="#"><div id="facebook"></div></a>
+            <a href="#"><div id="twitter"></div></a>
+            <a href="#"><div id="gplus"></div></a>
+        </div>
+        <div class="footer-col">
+            <p>
+                تمامی حقوق این سایت متعلق به دانشگاه امیرکبیر بوده و هرگونه استفاده از منابع و طراحی های این سایت توسط نهادی خارج از دانشگاه با پیگرد قانونی همراه خواهد بود.
+            </p>
+        </div>
+    </div>
+
+
+    <div id="support-closed" class="support-closed">
+        <a onclick="openChat();">
+            <img src="style\img\support-closed.png">
+            <p>پشتیبانی آنلاین</p>
+        </a>
+    </div>
+
+    <div id="support-open" class="support-open">
+        <button onclick="closeChat();">_</button>
+        <img id="support-image" class="supporter" src="">
+        <div class="header">
+            <h3 style="margin-bottom: -10px">پشتیبان بخش فروش</h3>
+            <p id="support-name"></p>
+        </div>
+        <div class="chat">
+            <div id="messages">
+            </div>
+            <div class="input">
+                <div style="background-color: #FFF;border-radius: 10px;height: inherit">
+                    <input id="text" type="text" placeholder="متن پیام به پشتیبانی...">
+                    <button onclick="send();"><img src="style\img\send.png" style="width: 25px;margin-right: -4px">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+
+
+
+<script>
+    var app = new Vue({
+        el: '#content',
+        data: {
+            message : 'hello Vue'
+        }
+    })
+</script>

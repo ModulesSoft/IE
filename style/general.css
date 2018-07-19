@@ -32,6 +32,9 @@ hr {
   border-radius: 15px;
   outline: none;
   color: #9DBFAF;
+  font-weight: bold;
+  padding-right:15px;
+  direction:rtl;
 }
 
 
