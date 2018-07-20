@@ -5,7 +5,7 @@
             <b-col>
                 <div class="form-element">
                     نام کاربری<br>
-                    <input type="text" disabled :value="this.$session.getAll().user.username" >
+                    <input type="text" disabled :value="this.$session.getAll().user.username">
                 </div>
                 <div class="form-element">
                     شماره تلفن همراه<br>
@@ -101,6 +101,87 @@
                 </button>
             </b-col>
         </b-row>
+        <b-col>
+            <table class="table">
+                <thead class="thead-light">
+                <tr align="center">
+                    <th scope="col">ردیف</th>
+                    <th scope="col">کد</th>
+                    <th scope="col">تاریخ و ساعت</th>
+                    <th scope="col">مبلغ کل</th>
+                    <th scope="col">وضعیت</th>
+                    <th scope="col">عملیات</th>
+                    <th scope="col">جزییات</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,key) in orders" :key="key" align="center">
+                    <td>
+                        <div>{{ key }}</div>
+                    </td>
+                    <td>
+                        <div>{{ item.id }}</div>
+                    </td>
+                    <td>
+                        <div> {{ item.created_at }}</div>
+                    </td>
+                    <td>
+                        <div> {{ item.totalPrice }}</div>
+                    </td>
+                    <td>
+                        <div v-if="item.status==0">پرداخت نشده</div>
+                        <div v-if="item.status==1">پرداخت شده</div>
+                    </td>
+                    <td>
+                        <div v-if="item.status==0">
+                            <button type="button" class="btn btn-info">
+                                پرداخت
+                            </button>
+                        </div>
+                        <div v-else>
+                            <button type="button" disabled class="btn btn-warning">
+                                پرداخت
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <i class="fas fa-angle-down" @click="getOrderProducts(item.id)"
+                           style="font-size: 20px;cursor: pointer"></i>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--<div v-for="product in products">-->
+            <!--{{product.name}}-->
+            <!--</div>-->
+            <b-row v-if="products">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr align="center">
+                        <th scope="col">مشخصات محصول</th>
+                        <th scope="col">تعداد</th>
+                        <th scope="col">قیمت</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(product,key) in products" :key="key" align="center" v-if="product.id">
+                        <td>
+                            <div class="itemImage">
+                                <img src="https://www.w3schools.com/w3css/img_lights.jpg" class="itemImage"/>
+                            </div>
+                            <div class="itemName">{{product.name}}</div>
+                        </td>
+                        <td>
+                            ثبت نمیشود!
+                        </td>
+                        <td>
+                            <div>{{product.price}}</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </b-row>
+        </b-col>
     </div>
 </template>
 
@@ -121,6 +202,8 @@
                 address: "",
                 city: "",
                 lat: "", lon: "",
+                orders: null,
+                products: null
             }
         },
         mounted() {
@@ -128,14 +211,11 @@
                 .then(response => (this.addresses = response.data))//.then(response => (this.names.push(response.data.name)))
             axios.get('user/getAddresses/' + this.$session.getAll().user.id)
                 .then(response => (this.addresses = response.data))//.then(response => (this.names.push(response.data.name)))
+            axios.get('getOrder/' + this.$session.getAll().user.id)
+                .then(response => (this.orders = response.data))//.then(response => (this.names.push(response.data.name)))
         },
         methods: {
             editUser() {
-                // $users = Users::find($id);
-                // $users->username = $username;
-                // $users->password = $password;
-                // $users->credit = $credit;
-                // $users->avatarURL = $avatarURL;
                 var pass = ''
                 if (this.pass0) {
                     if (this.username) {
@@ -147,8 +227,13 @@
                     if (this.pass1 || this.pass2) {
                         if (this.pass1 == this.pass2) {
                             axios.post('/editUser',
-                                {users_id:this.$session.getAll().user.id, username:this.$session.getAll().user.username,password:this.pass1,avatarURL:this.$session.getAll().user.avatarURL}
-                            ).then(response => (this.success="password successfully changed!"));
+                                {
+                                    users_id: this.$session.getAll().user.id,
+                                    username: this.$session.getAll().user.username,
+                                    password: this.pass1,
+                                    avatarURL: this.$session.getAll().user.avatarURL
+                                }
+                            ).then(response => (this.success = "password successfully changed!"));
 
                         } else {
                             this.error = "passwords don't match"
@@ -160,8 +245,18 @@
             },
             editAddress() {
                 axios.post('/user/addresses',
-                    {users_id:this.$session.getAll().user.id, addressText: this.address, city: this.city, lat: this.lat, lon: this.lon}
+                    {
+                        users_id: this.$session.getAll().user.id,
+                        addressText: this.address,
+                        city: this.city,
+                        lat: this.lat,
+                        lon: this.lon
+                    }
                 ).then(response => (this.$router.go()));
+            },
+            getOrderProducts(id) {
+                axios.get('/getOrderProducts/' + id)
+                    .then(response => (this.products = response.data))
             }
         }
     }
@@ -224,5 +319,12 @@
         margin-left: 8%;
         float: left;
         cursor: pointer;
+    }
+
+    .itemImage {
+        float: right;
+        width: 100px;
+        height: 100px;
+        border: solid 3px;
     }
 </style>

@@ -39682,7 +39682,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
             prices: [],
             images: [],
             names: [],
-            number: []
+            numbers: []
         };
     },
     mounted: function mounted() {
@@ -39704,7 +39704,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
                 axios.get('/getProduct/' + id).then(function (response) {
                     return _this.prices.push(response.data.price);
                 });
-                this.number[i] = 1;
+                this.numbers.push({ id: i, count: 1 });
                 // images.push()
                 // var size = this.$session.getAll().sizes[i];
                 // items[i][2] = this.$session.getAll().colors[i];
@@ -39718,13 +39718,25 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
         send: function send() {
             var _this2 = this;
 
-            // for (var i = 0; i < this.$session.getAll().items.length; i++) {
-            // var id = this.$session.getAll().items[i]
-            axios.post('/order', //this.$session.getAll().items
-            { products: this.$session.getAll().items, totalPrice: 1000, address: 'abcde', paymentType: 2, userId: this.$session.getAll().user.id, status: 0, deliveryTime: 90 }).then(function (response) {
+            var totalPrice = 0;
+            var j = 0;
+            for (var i in this.prices) {
+                totalPrice += this.prices[j] * this.numbers[j].count;
+                j++;
+            }
+            // console.log(totalPrice);
+
+            axios.post('/order', {
+                products: this.$session.getAll().items,
+                totalPrice: totalPrice,
+                address: 'abcde',
+                paymentType: 2,
+                userId: this.$session.getAll().user.id,
+                status: 0,
+                deliveryTime: 90
+            }).then(function (response) {
                 return _this2.validate(response);
             });
-            // }
         },
         validate: function validate(response) {
             if (response.data == 'ok') {
@@ -39735,12 +39747,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
             }
         },
         plus: function plus(id) {
-            console.log(this.number[id]);
-            this.number[id] = this.number[id] + 1;
+            console.log(this.numbers[id]);
+            this.numbers[id].count = this.numbers[id].count + 1;
         },
         minus: function minus(id) {
-            console.log(this.number[id]);
-            if (this.number[id] > 1) this.number[id] = this.number[id] - 1;
+            console.log(this.numbers[id]);
+            if (this.numbers[id].count > 1) this.numbers[id].count = this.numbers[id].count - 1;
         }
     }
 });
@@ -39827,7 +39839,8 @@ var render = function() {
                           "margin-right": "15px",
                           width: "15px"
                         },
-                        domProps: { value: _vm.number[i] }
+                        attrs: { disabled: "" },
+                        domProps: { value: _vm.numbers[i].count }
                       }),
                       _vm._v(" "),
                       _c("i", {
@@ -39847,7 +39860,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [
-                    _c("div", [_vm._v(_vm._s(_vm.prices[i] * _vm.number[i]))])
+                    _c("div", [
+                      _vm._v(_vm._s(_vm.prices[i] * _vm.numbers[i].count))
+                    ])
                   ])
                 ])
               })
@@ -39986,7 +40001,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.avatarImage[data-v-22ef5402] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    border-style: solid;\n}\n.form-element[data-v-22ef5402] {\n    text-align: right;\n    float: right;\n    display: inline-block;\n    margin-right: 5%;\n    font-size: 80%;\n    color: blue;\n}\n.form-element input[data-v-22ef5402] {\n    border-radius: 20px;\n    width: 300px;\n    border-color: silver;\n    border-style: solid;\n    border-width: 1px;\n    background-color: #DAE5F0;\n    height: 30px;\n    padding-right: 15px;\n/ / padding-left: 15 px;\n    direction: rtl;\n}\n.form-element textarea[data-v-22ef5402] {\n    border-radius: 20px;\n    width: 650px;\n    height: 150px;\n    border-color: silver;\n    border-style: solid;\n    border-width: 1px;\n    background-color: #DAE5F0;\n    padding: 2%;\n    margin: 2%;\n    /*margin-bottom: 100px;*/\n    resize: none;\n    direction: rtl;\n}\n.contact-form button[data-v-22ef5402] {\n    border-radius: 20px;\n    color: blue;\n    border-style: solid;\n    border-color: blue;\n    width: 200px;\n    height: 30px;\n    background-color: white;\n    border-width: 1px;\n    margin-left: 8%;\n    float: left;\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.avatarImage[data-v-22ef5402] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    border-style: solid;\n}\n.form-element[data-v-22ef5402] {\n    text-align: right;\n    float: right;\n    display: inline-block;\n    margin-right: 5%;\n    font-size: 80%;\n    color: blue;\n}\n.form-element input[data-v-22ef5402] {\n    border-radius: 20px;\n    width: 300px;\n    border-color: silver;\n    border-style: solid;\n    border-width: 1px;\n    background-color: #DAE5F0;\n    height: 30px;\n    padding-right: 15px;\n/ / padding-left: 15 px;\n    direction: rtl;\n}\n.form-element textarea[data-v-22ef5402] {\n    border-radius: 20px;\n    width: 650px;\n    height: 150px;\n    border-color: silver;\n    border-style: solid;\n    border-width: 1px;\n    background-color: #DAE5F0;\n    padding: 2%;\n    margin: 2%;\n    /*margin-bottom: 100px;*/\n    resize: none;\n    direction: rtl;\n}\n.contact-form button[data-v-22ef5402] {\n    border-radius: 20px;\n    color: blue;\n    border-style: solid;\n    border-color: blue;\n    width: 200px;\n    height: 30px;\n    background-color: white;\n    border-width: 1px;\n    margin-left: 8%;\n    float: left;\n    cursor: pointer;\n}\n.itemImage[data-v-22ef5402] {\n    float: right;\n    width: 100px;\n    height: 100px;\n    border: solid 3px;\n}\n", ""]);
 
 // exports
 
@@ -39999,6 +40014,87 @@ exports.push([module.i, "\n.avatarImage[data-v-22ef5402] {\n    width: 200px;\n 
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -40121,7 +40217,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
             addresses: null,
             address: "",
             city: "",
-            lat: "", lon: ""
+            lat: "", lon: "",
+            orders: null,
+            products: null
         };
     },
     mounted: function mounted() {
@@ -40133,17 +40231,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
         axios.get('user/getAddresses/' + this.$session.getAll().user.id).then(function (response) {
             return _this.addresses = response.data;
         }); //.then(response => (this.names.push(response.data.name)))
+        axios.get('getOrder/' + this.$session.getAll().user.id).then(function (response) {
+            return _this.orders = response.data;
+        }); //.then(response => (this.names.push(response.data.name)))
     },
 
     methods: {
         editUser: function editUser() {
             var _this2 = this;
 
-            // $users = Users::find($id);
-            // $users->username = $username;
-            // $users->password = $password;
-            // $users->credit = $credit;
-            // $users->avatarURL = $avatarURL;
             var pass = '';
             if (this.pass0) {
                 if (this.username) {
@@ -40154,7 +40250,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
                     //change password
                 if (this.pass1 || this.pass2) {
                     if (this.pass1 == this.pass2) {
-                        axios.post('/editUser', { users_id: this.$session.getAll().user.id, username: this.$session.getAll().user.username, password: this.pass1, avatarURL: this.$session.getAll().user.avatarURL }).then(function (response) {
+                        axios.post('/editUser', {
+                            users_id: this.$session.getAll().user.id,
+                            username: this.$session.getAll().user.username,
+                            password: this.pass1,
+                            avatarURL: this.$session.getAll().user.avatarURL
+                        }).then(function (response) {
                             return _this2.success = "password successfully changed!";
                         });
                     } else {
@@ -40168,8 +40269,21 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__
         editAddress: function editAddress() {
             var _this3 = this;
 
-            axios.post('/user/addresses', { users_id: this.$session.getAll().user.id, addressText: this.address, city: this.city, lat: this.lat, lon: this.lon }).then(function (response) {
+            axios.post('/user/addresses', {
+                users_id: this.$session.getAll().user.id,
+                addressText: this.address,
+                city: this.city,
+                lat: this.lat,
+                lon: this.lon
+            }).then(function (response) {
                 return _this3.$router.go();
+            });
+        },
+        getOrderProducts: function getOrderProducts(id) {
+            var _this4 = this;
+
+            axios.get('/getOrderProducts/' + id).then(function (response) {
+                return _this4.products = response.data;
             });
         }
     }
@@ -40581,6 +40695,158 @@ var render = function() {
           ])
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-col",
+        [
+          _c("table", { staticClass: "table" }, [
+            _c("thead", { staticClass: "thead-light" }, [
+              _c("tr", { attrs: { align: "center" } }, [
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("ردیف")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("کد")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("تاریخ و ساعت")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("مبلغ کل")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("وضعیت")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("عملیات")]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [_vm._v("جزییات")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.orders, function(item, key) {
+                return _c("tr", { key: key, attrs: { align: "center" } }, [
+                  _c("td", [_c("div", [_vm._v(_vm._s(key))])]),
+                  _vm._v(" "),
+                  _c("td", [_c("div", [_vm._v(_vm._s(item.id))])]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("div", [_vm._v(" " + _vm._s(item.created_at))])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("div", [_vm._v(" " + _vm._s(item.totalPrice))])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    item.status == 0
+                      ? _c("div", [_vm._v("پرداخت نشده")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    item.status == 1
+                      ? _c("div", [_vm._v("پرداخت شده")])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    item.status == 0
+                      ? _c("div", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: { type: "button" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            پرداخت\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      : _c("div", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning",
+                              attrs: { type: "button", disabled: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            پرداخت\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("i", {
+                      staticClass: "fas fa-angle-down",
+                      staticStyle: { "font-size": "20px", cursor: "pointer" },
+                      on: {
+                        click: function($event) {
+                          _vm.getOrderProducts(item.id)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              })
+            )
+          ]),
+          _vm._v(" "),
+          _vm.products
+            ? _c("b-row", [
+                _c("table", { staticClass: "table" }, [
+                  _c("thead", { staticClass: "thead-light" }, [
+                    _c("tr", { attrs: { align: "center" } }, [
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v("مشخصات محصول")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("تعداد")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("قیمت")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.products, function(product, key) {
+                      return product.id
+                        ? _c("tr", { key: key, attrs: { align: "center" } }, [
+                            _c("td", [
+                              _c("div", { staticClass: "itemImage" }, [
+                                _c("img", {
+                                  staticClass: "itemImage",
+                                  attrs: {
+                                    src:
+                                      "https://www.w3schools.com/w3css/img_lights.jpg"
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "itemName" }, [
+                                _vm._v(_vm._s(product.name))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                "\n                        ثبت نمیشود!\n                    "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c("div", [_vm._v(_vm._s(product.price))])
+                            ])
+                          ])
+                        : _vm._e()
+                    })
+                  )
+                ])
+              ])
+            : _vm._e()
+        ],
+        1
       )
     ],
     1
@@ -40631,7 +40897,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.category-images[data-v-85ef4954]{\n    position: relative;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    margin-right: 10%;\n    margin-left: 10%;\n}\n.category-images img[data-v-85ef4954]{\n    position: relative;\n    width: 300px;\n    height: 180px;\n    border:solid gray 1px;\n}\n.image-text[data-v-85ef4954]{\n    position: absolute;\n    top: 130px;\n    width: 60px;\n}\n.image-text span[data-v-85ef4954]{\n    color: white;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    letter-spacing: 1px;\n    background: rgb(0, 0, 0); /* fallback color */\n    background: rgba(0, 0, 0, 0.7);\n    padding: 13px 150px 16px 150px;\n}\n.category-images a[data-v-85ef4954]{\n    opacity: 0.6;\n}\n.category-images a[data-v-85ef4954]:hover{\n    opacity: 1;\n}\n#khabarname[data-v-85ef4954]{\n    background-color: blue;border-radius: 2%;border-color:blue;-webkit-box-shadow: 0px 10px 30px #7B808C;box-shadow: 0px 10px 30px #7B808C;color: white;\n    text-align: center;\n}\n.email[data-v-85ef4954]{\n    border-radius: 20px;\n    border:none;\n    margin: 25px;\n    width: 200px;\n    height: 25px;\n    color: blue;\n    padding-right: 15px;\n\n    border-style: solid;\n    border-color: silver;\n    border-width: 1px;\n    vertical-align:top;\n}\n.join-btn[data-v-85ef4954]{\n    border:none;\n    border-radius: 20px;\n    background-color: black;\n    color: white;\n    height: 35px;\n    width: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.category-images[data-v-85ef4954]{\n    position: relative;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    margin-right: 10%;\n    margin-left: 10%;\n}\n.category-images img[data-v-85ef4954]{\n    position: relative;\n    width: 300px;\n    height: 180px;\n    border:solid gray 1px;\n}\n.image-text[data-v-85ef4954]{\n    position: absolute;\n    top: 130px;\n    width: 60px;\n}\n.image-text span[data-v-85ef4954]{\n    color: white;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    letter-spacing: 1px;\n    background: rgb(0, 0, 0); /* fallback color */\n    background: rgba(0, 0, 0, 0.7);\n    padding: 13px 150px 16px 150px;\n}\n.category-images a[data-v-85ef4954]{\n    opacity: 0.6;\n}\n.category-images a[data-v-85ef4954]:hover{\n    opacity: 1;\n}\n#khabarname[data-v-85ef4954]{\n    background-color: blue;border-radius: 2%;border-color:blue;-webkit-box-shadow: 0px 10px 30px #7B808C;box-shadow: 0px 10px 30px #7B808C;color: white;\n    text-align: center;\n}\n.email[data-v-85ef4954]{\n    direction: ltr;\n    border-radius: 20px;\n    border:none;\n    margin: 25px;\n    width: 200px;\n    height: 25px;\n    color: blue;\n    padding-left: 15px;\n\n    border-style: solid;\n    border-color: silver;\n    border-width: 1px;\n    vertical-align:top;\n}\n.join-btn[data-v-85ef4954]{\n    border:none;\n    border-radius: 20px;\n    background-color: black;\n    color: white;\n    height: 35px;\n    width: 100px;\n}\n", ""]);
 
 // exports
 

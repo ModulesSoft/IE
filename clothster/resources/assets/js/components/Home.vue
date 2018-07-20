@@ -105,13 +105,14 @@
         text-align: center;
     }
     .email{
+        direction: ltr;
         border-radius: 20px;
         border:none;
         margin: 25px;
         width: 200px;
         height: 25px;
         color: blue;
-        padding-right: 15px;
+        padding-left: 15px;
 
         border-style: solid;
         border-color: silver;

@@ -28,13 +28,13 @@
                         <div style="width: 100px">
                             <i @click="plus(i)" class="fas fa-plus-circle"
                                style="font-size:30px;float:right;cursor: pointer"></i>
-                            <input style="float:right;margin-right: 15px;width: 15px" :value="number[i]">
+                            <input style="float:right;margin-right: 15px;width: 15px" disabled :value="numbers[i].count">
                             <i @click="minus(i)" class="fas fa-minus-circle"
                                style="font-size:30px;float:left;cursor: pointer"></i>
                         </div>
                     </td>
                     <td>
-                        <div>{{prices[i]*number[i]}}</div>
+                        <div>{{prices[i]*numbers[i].count}}</div>
                     </td>
                 </tr>
                 </tbody>
@@ -67,7 +67,7 @@
                 prices: [],
                 images: [],
                 names: [],
-                number: []
+                numbers: []
             }
         },
         mounted() {
@@ -84,7 +84,7 @@
                         .then(response => (this.names.push(response.data.name)))
                     axios.get('/getProduct/' + id)
                         .then(response => (this.prices.push(response.data.price)))
-                    this.number[i] = 1
+                    this.numbers.push({id: i, count: 1})
                     // images.push()
                     // var size = this.$session.getAll().sizes[i];
                     // items[i][2] = this.$session.getAll().colors[i];
@@ -95,29 +95,42 @@
         },
         methods: {
             send() {
-                // for (var i = 0; i < this.$session.getAll().items.length; i++) {
-                // var id = this.$session.getAll().items[i]
-                axios.post('/order',//this.$session.getAll().items
-                    {products: this.$session.getAll().items , totalPrice: 1000 , address: 'abcde' , paymentType: 2, userId:this.$session.getAll().user.id,status:0,deliveryTime:90}
-                    ).then(response => (this.validate(response)));
-                // }
+                var totalPrice = 0
+                var j = 0
+                for(var i in this.prices){
+                    totalPrice += this.prices[j]*this.numbers[j].count;
+                    j++
+                }
+                // console.log(totalPrice);
+
+                axios.post('/order',
+                    {
+                        products: this.$session.getAll().items,
+                        totalPrice: totalPrice,
+                        address: 'abcde',
+                        paymentType: 2,
+                        userId: this.$session.getAll().user.id,
+                        status: 0,
+                        deliveryTime: 90
+                    }
+                ).then(response => (this.validate(response)));
             },
-            validate(response){
-                if(response.data=='ok'){
+            validate(response) {
+                if (response.data == 'ok') {
                     this.$session.set('items', null);
                     this.$session.set('colors', null);
                     this.$session.set('sizes', null);
-                    window.location="/"
+                    window.location = "/"
                 }
             },
             plus(id) {
-                console.log(this.number[id])
-                this.number[id] = this.number[id] + 1
+                console.log(this.numbers[id])
+                this.numbers[id].count = this.numbers[id].count + 1
             },
             minus(id) {
-                console.log(this.number[id])
-                if (this.number[id] > 1)
-                    this.number[id] = this.number[id] - 1
+                console.log(this.numbers[id])
+                if (this.numbers[id].count > 1)
+                    this.numbers[id].count = this.numbers[id].count  - 1
             }
         }
     }

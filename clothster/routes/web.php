@@ -28,6 +28,7 @@ Route::get('/productsCount/{filters}', 'HomeController@productsCount');
 Route::get('/getProduct/{id}', 'HomeController@product');
 Route::get('/filters/{name},{value}', 'HomeController@filters');
 Route::get('/getOrder/{id}', 'HomeController@getOrder');
+Route::get('/getOrderProducts/{id}', 'HomeController@getOrderProducts');
 Route::get('/getUser/{id}', 'HomeController@getUser');
 Route::get('user/getAddresses/{id}', 'HomeController@getAddresses');
 Route::put('user/addresses/{id}', 'HomeController@setAddresses');
