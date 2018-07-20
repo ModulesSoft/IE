@@ -21,6 +21,7 @@ Route::get('/search/{keyword}',function (){return view('welcome');});
 Route::get('/cart',function (){return view('welcome');});
 Route::get('/profile',function (){return view('welcome');})->middleware('auth');;
 
+Route::get('/home', 'HomeController@homePage');
 Route::get('/getCategories', 'HomeController@categories');
 Route::get('/products/{filters},{page},{perpage}', 'HomeController@products');
 Route::get('/productsCount/{filters}', 'HomeController@productsCount');

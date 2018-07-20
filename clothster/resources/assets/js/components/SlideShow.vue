@@ -1,9 +1,8 @@
 <template>
-    <section id="Wrapper">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <b-row id="Wrapper">
         <div class="slideshow">
             <div id="slider">
-                <img :src="currentImage" alt="slide"/>
+                <img v-for="(item,key) in images" :key="key" v-if="slideIndex == key" :src="item.big" :to="item.link" alt="slide"/>
             </div>
             <div id="Arrows">
                 <i @click="prevImage" id="Prev" class="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
@@ -13,13 +12,13 @@
                 <ul>
                     <div class="list-inline dots"
                          v-for="index in  images.length" :key="index"
-                         @click="actviateImage(index-1)">
-                        <li v-if="activeImage == index-1" class="active"></li>
+                         @click="slideIndex = index-1">
+                        <li v-if="slideIndex == index-1" class="active"></li>
                     </div>
                 </ul>
             </div>
         </div>
-    </section>
+    </b-row>
 </template>
 
 <script>
@@ -29,54 +28,42 @@
     export default {
         data() {
             return {
-                images: [
-                    {
-                        id: "1",
-                        big: "http://aacerflooring.in/wp-content/uploads/2012/12/banner-fallmaples-960x360.jpg"
-                    },
-                    {
-                        id: "2",
-                        big:
-                            "http://wowslider.com/sliders/demo-6/data/images/greenmountain.jpg"
-                    },
-                    {
-                        id: "3",
-                        big:
-                            "http://wowslider.com/sliders/demo-42/data1/images/lighthouse.jpg"
-                    },
-                    {
-                        id: "4",
-                        big:
-                            "http://wowslider.com/sliders/demo-37/data1/images/mountainlandscape.jpg"
-                    }
-                ],
-                activeImage: 0
+                images: [],
+                slideIndex: 0,
+                slideLength: 0
             };
         },
         computed: {
             // currentImage gets called whenever activeImage changes
             // and is the reason why we don't have to worry about the
             // big image getting updated
-            currentImage: function () {
-                return this.images[this.activeImage].big;
-            }
         },
+        mounted() {
+            axios.get('/home')
+                .then(response => (this.setImages(response.data.banners)))
+        }
+        ,
         methods: {
-            nextImage: function () {
-                this.activeImage = this.activeImage + 1;
-                if (this.activeImage >= this.images.length) {
-                    this.activeImage = 0;
+            setImages(banners) {
+                // console.log(banners[])
+                var arr = [];
+                for (var i = 0; i < banners.length; i++) {
+                    arr[i] = {
+                        link: banners[i].bannerLink,
+                        big: banners[i].bannerURL
+                    }
                 }
+                this.images = arr;
+                this.slideLength = banners.length;
             },
-            prevImage: function () {
-                this.activeImage = this.activeImage - 1;
-                if (this.activeImage <= 0) {
-                    this.activeImage = 0;
-                }
+            nextImage() {
+                if (this.slideLength > 0 && this.slideIndex < this.slideLength - 1)
+                    this.slideIndex++
             },
-            actviateImage: function (event) {
-                this.activeImage = event;
-            }
+            prevImage(n) {
+                if (this.slideLength > 0 && this.slideIndex > 0)
+                    this.slideIndex--
+            },
         }
     };
 </script>
@@ -89,6 +76,7 @@
         justify-content: center;
         padding: 50px;
         min-height: 100vh;
+        direction: ltr;
     }
 
     #Wrapper {

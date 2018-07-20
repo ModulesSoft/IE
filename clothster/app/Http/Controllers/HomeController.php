@@ -32,7 +32,21 @@ class HomeController extends Controller
 
     public function homePage()
     {
-        $arr = array("banners" => array("bannerURL" => "abcd.com", "bannerLink" => "abcde.com"), "aboutUsText" => "aut", "promotions" => array("text" => "212dasd", "text" => "aa212dasd"));
+        $banners = array(
+            array("bannerURL" => "http://aacerflooring.in/wp-content/uploads/2012/12/banner-fallmaples-960x360.jpg", "bannerLink" => "#"),
+            array("bannerURL" => "http://wowslider.com/sliders/demo-6/data/images/greenmountain.jpg", "bannerLink" => "#"),
+            array("bannerURL" => "http://wowslider.com/sliders/demo-42/data1/images/lighthouse.jpg", "bannerLink" => "#"),
+            array("bannerURL" => "http://wowslider.com/sliders/demo-37/data1/images/mountainlandscape.jpg", "bannerLink" => "#"),
+        );
+        $about = "salam ma inim";
+        $sections =  array(
+            array("bannerURL" => "http://thefashionformen.com/wp-content/uploads/2015/01/stylish-clothes-for-men.jpg", "bannerLink" => "/search/catId=1" , "bannerText" => "مردانه"),
+            array("bannerURL" => "http://weareladies.net/wp-content/uploads/2015/01/Women-best-clothes-2015.jpeg", "bannerLink" => "/search/catId=2" ,"bannerText" => "زنانه"),
+            array("bannerURL" => "https://luxuryactivist.com/wp-content/uploads/Children-fashion-clothes.jpg", "bannerLink" => "/search/catId=4","bannerText" => "بچگانه"),
+        );
+        $promotions = array(array("rights" => "تمامی حقوق این سایت متعلق به دانشگاه امیرکبیر بوده و هرگونه استفاده از منابع و طراحی های این سایت توسط نهادی خارج از دانشگاه با پیگرد قانونی همراه خواهد بود."), array("text" => "aa212dasd"));
+        $arr = array("banners" => $banners
+        , "about" => $about, "promotions" => $promotions ,"sections" => $sections);
         return $arr;
     }
 
@@ -220,7 +234,7 @@ class HomeController extends Controller
 
     public function getOrder($id)
     {
-        $orders = Orders::where('users_id',$id);
+        $orders = Orders::where('users_id', $id);
         $products = DB::select("select * from products where products.id in (select orders_products.products_id from orders_products where orders_products.id in (select orders.id from orders where orders.users_id = '$id'))");
         $orders->products = $products;
         return $orders;
