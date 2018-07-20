@@ -13,18 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-//Auth::routes();
-//Route::get('/{vue_capture?}', function () {
-//    return view('welcome');
-//})->where('vue_capture', '[\/\w\.-]*');
+//for vue route
+Route::get('/', function () {return view('welcome');});
 Route::get('/categories/', function (){return view('welcome');});
 Route::get('/product/{id}', function (){return view('welcome');});
 Route::get('/search/{keyword}',function (){return view('welcome');});
 Route::get('/cart',function (){return view('welcome');});
+Route::get('/profile',function (){return view('welcome');});
 
 Route::get('/getCategories', 'HomeController@categories');
 Route::get('/products/{filters},{page},{perpage}', 'HomeController@products');

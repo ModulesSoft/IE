@@ -1,29 +1,36 @@
 <template>
     <b-row>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+              integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
+              crossorigin="anonymous">
         <b-col>
             <b-row v-if="user == null">
                 <b-col align="left">
-                    <div class="btnborder" >
+                    <div class="btnborder">
                         <a @click="toggle" class="abtn">login</a>
                         <modal v-if="this.showModal" @close="toggle" @user="setUser"></modal>
                     </div>
                 </b-col>
                 <b-col align="right">
-                    <div class="btnborder" >
+                    <div class="btnborder">
                         <a class="abtn">register</a>
                     </div>
                 </b-col>
             </b-row>
             <b-row v-else>
+
                 <b-col cols="3">
-                    <div align="center">
-                        {{user.username}}
-                        <i class="fa fa-angle-down" @click="logout"></i>
-                    </div>
+                    <b-dropdown class="mt-0" variant="light" :text="user.username" align="center"
+                            style="cursor: pointer;background-color: white">
+                        <!--{{}}-->
+                        <!--<i class="fa fa-angle-down" @click="logout"></i>-->
+                        <!--<>-->
+                        <b-dropdown-item to="/profile">پروفایل</b-dropdown-item>
+                        <b-dropdown-item @click="logout">خروج</b-dropdown-item>
+                    </b-dropdown>
                 </b-col>
                 <b-col cols="4">
-                    <router-link to="/cart" style="text-decoration: none"  align="center">
+                    <router-link to="/cart" style="text-decoration: none" align="center">
                         سبد خرید
                         <i class="fa fa-shopping-basket"></i>
                     </router-link>
@@ -54,6 +61,7 @@
     import modal from "./Modal.vue";
     import VueSession from 'vue-session'
     import Vue from "vue"
+
     Vue.use(VueSession)
 
     export default {
@@ -102,6 +110,7 @@
 </script>
 
 <style scoped>
+
     .brand_word {
         text-decoration: none;
         color: silver;
