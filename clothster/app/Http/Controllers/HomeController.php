@@ -6,7 +6,7 @@ use App\Addresses;
 use App\CategoriesProducts;
 use App\ProductsImages;
 use App\ProductsSizes;
-use App\Users;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Orders;
 use App\OrdersProducts;
@@ -220,9 +220,10 @@ class HomeController extends Controller
 
     public function getOrder($id)
     {
-        $orders = Orders::find($id);
-        $products = DB::select("select * from products where id in (select products_id from  orders_products where orders_id= '$id')");
-        return array("products" => $products, "order" => $orders);
+        $orders = Orders::where('users_id',$id);
+        $products = DB::select("select * from products where products.id in (select orders_products.products_id from orders_products where orders_products.id in (select orders.id from orders where orders.users_id = '$id'))");
+        $orders->products = $products;
+        return $orders;
     }
 
     public function getUser($id)
@@ -277,14 +278,14 @@ class HomeController extends Controller
 
     public function editUser(Request $request)
     {
-        $id = $request::get('id');
+        $id = $request::get('users_id');
         $username = $request::get('username');
         $password = Hash::make($request::get('password'));
         $avatarURL = $request::get('avatarURL');
         $credit = $request::get('credit');
         if (isset($username)) {
             if (isset($password)) {
-                $users = Users::find($id);
+                $users = User::find($id);
                 $users->username = $username;
                 $users->password = $password;
                 $users->credit = $credit;
@@ -299,21 +300,22 @@ class HomeController extends Controller
         }
     }
 
-    public function getAddresses()
+    public function getAddresses($id)
     {
-        $id = 13;
         $addresses = new Addresses;
         return $addresses::where('users_id', $id)->get();
     }
 
-    public function setAddresses($id, Request $request)
+    public function setAddresses(Request $request)
     {
-        $addresses = Addresses::find($id);
+        $addresses = new Addresses;
+        $addresses->users_id = $request::get('users_id');
         $addresses->addressText = $request::get('addressText');
         $addresses->city = $request::get('city');;
         $addresses->lat = $request::get('lat');;
         $addresses->lon = $request::get('lon');;
         $addresses->save();
+        return "ok";
     }
     /**
      * Show the application dashboard.

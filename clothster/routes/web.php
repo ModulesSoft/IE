@@ -19,22 +19,22 @@ Route::get('/categories/', function (){return view('welcome');});
 Route::get('/product/{id}', function (){return view('welcome');});
 Route::get('/search/{keyword}',function (){return view('welcome');});
 Route::get('/cart',function (){return view('welcome');});
-Route::get('/profile',function (){return view('welcome');});
+Route::get('/profile',function (){return view('welcome');})->middleware('auth');;
 
 Route::get('/getCategories', 'HomeController@categories');
 Route::get('/products/{filters},{page},{perpage}', 'HomeController@products');
 Route::get('/productsCount/{filters}', 'HomeController@productsCount');
 Route::get('/getProduct/{id}', 'HomeController@product');
 Route::get('/filters/{name},{value}', 'HomeController@filters');
-Route::get('/getOrder/{id}', 'HomeController@getOrder')->middleware('auth');
+Route::get('/getOrder/{id}', 'HomeController@getOrder');
 Route::get('/getUser/{id}', 'HomeController@getUser');
-Route::get('user/addresses', 'HomeController@getAddresses');
-Route::get('user/addresses/{id}', 'HomeController@setAddresses');
-
+Route::get('user/getAddresses/{id}', 'HomeController@getAddresses');
+Route::put('user/addresses/{id}', 'HomeController@setAddresses');
 
 Route::post('/order/','HomeController@order');
 Route::post('/order/{id}/update','HomeController@orderPost');
 Route::post('/setUser','HomeController@setUser');
+Route::post('user/addresses', 'HomeController@setAddresses');
 Route::post('/editUser','HomeController@editUser');
 
 

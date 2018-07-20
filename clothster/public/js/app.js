@@ -40045,7 +40045,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.avatarImage[data-v-22ef5402] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    border-style: solid;\n}\n.form-element[data-v-22ef5402] {\n    text-align: right;\n    float: right;\n    display: inline-block;\n    margin-right: 5%;\n    font-size: 80%;\n    color: blue;\n}\n.form-element input[data-v-22ef5402] {\n    border-radius: 20px;\n    width: 300px;\n    border-color: silver;\n    border-style: solid;\n    border-width: 1px;\n    background-color: #DAE5F0;\n    height: 30px;\n    padding-right: 15px;\n/ / padding-left: 15 px;\n    direction: rtl;\n}\n.form-element textarea[data-v-22ef5402] {\n    border-radius: 20px;\n    width: 650px;\n    height: 150px;\n    border-color: silver;\n    border-style: solid;\n    border-width: 1px;\n    background-color: #DAE5F0;\n    padding: 2%;\n    margin: 2%;\n    /*margin-bottom: 100px;*/\n    resize: none;\n    direction: rtl;\n}\n.contact-form button[data-v-22ef5402] {\n    border-radius: 20px;\n    color: blue;\n    border-style: solid;\n    border-color: blue;\n    width: 200px;\n    height: 30px;\n    background-color: white;\n    border-width: 1px;\n    margin-left: 8%;\n    float: left;\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -40056,13 +40056,182 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Top', __webpack_require__(38));
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Profile"
+    data: function data() {
+        return {
+            pass0: '',
+            pass1: '',
+            pass2: '',
+            username: '',
+            error: '',
+            success: '',
+            addresses: null,
+            address: "",
+            city: "",
+            lat: "", lon: ""
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('user/getAddresses/' + this.$session.getAll().user.id).then(function (response) {
+            return _this.addresses = response.data;
+        }); //.then(response => (this.names.push(response.data.name)))
+        axios.get('user/getAddresses/' + this.$session.getAll().user.id).then(function (response) {
+            return _this.addresses = response.data;
+        }); //.then(response => (this.names.push(response.data.name)))
+    },
+
+    methods: {
+        editUser: function editUser() {
+            var _this2 = this;
+
+            // $users = Users::find($id);
+            // $users->username = $username;
+            // $users->password = $password;
+            // $users->credit = $credit;
+            // $users->avatarURL = $avatarURL;
+            var pass = '';
+            if (this.pass0) {
+                if (this.username) {
+                    //
+                } else {}
+                    // this.error = "username can't be empty"
+
+                    //change password
+                if (this.pass1 || this.pass2) {
+                    if (this.pass1 == this.pass2) {
+                        axios.post('/editUser', { users_id: this.$session.getAll().user.id, username: this.$session.getAll().user.username, password: this.pass1, avatarURL: this.$session.getAll().user.avatarURL }).then(function (response) {
+                            return _this2.success = "password successfully changed!";
+                        });
+                    } else {
+                        this.error = "passwords don't match";
+                    }
+                }
+            } else {
+                this.error = "fill current password correctly";
+            }
+        },
+        editAddress: function editAddress() {
+            var _this3 = this;
+
+            axios.post('/user/addresses', { users_id: this.$session.getAll().user.id, addressText: this.address, city: this.city, lat: this.lat, lon: this.lon }).then(function (response) {
+                return _this3.$router.go();
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -40073,7 +40242,408 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("top"),
+      _vm._v(" "),
+      _c(
+        "b-row",
+        [
+          _c("b-col", [
+            _c("div", { staticClass: "form-element" }, [
+              _vm._v("\n                نام کاربری"),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "text", disabled: "" },
+                domProps: { value: this.$session.getAll().user.username }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-element" }, [
+              _vm._v("\n                شماره تلفن همراه"),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "tel", name: "site" } })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-element" }, [
+              _vm._v("\n                تاریخ تولد"),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "date", name: "email" } })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-element",
+                staticStyle: { "margin-top": "90px" }
+              },
+              [
+                _vm._v("\n                رمز عبور قدیم"),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.pass0,
+                      expression: "pass0"
+                    }
+                  ],
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.pass0 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.pass0 = $event.target.value
+                    }
+                  }
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("b-col", [
+            _c("div", { attrs: { align: "center" } }, [
+              _c("div", [_vm._v(_vm._s(this.$session.getAll().user.username))]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "avatarImage",
+                attrs: { src: this.$session.getAll().user.avatarURL }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "form-element",
+                  staticStyle: { "margin-top": "10px" }
+                },
+                [
+                  _vm._v("\n                    رمز عبور جدید"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.pass1,
+                        expression: "pass1"
+                      }
+                    ],
+                    attrs: { type: "password" },
+                    domProps: { value: _vm.pass1 },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.pass1 = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-info mt-5",
+                  staticStyle: {
+                    width: "250px",
+                    "border-radius": "30px",
+                    "background-color": "blue"
+                  },
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.editUser()
+                    }
+                  }
+                },
+                [_vm._v("\n                    ثبت تغییرات\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticStyle: { color: "red", "margin-top": "10px" } },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.error) +
+                      "\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticStyle: { color: "green", "margin-top": "10px" } },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.success) +
+                      "\n                "
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("b-col", [
+            _c("div", { staticClass: "form-element" }, [
+              _vm._v("\n                شهر"),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "text" } })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-element" }, [
+              _vm._v("\n                تلفن ثابت"),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "text" } })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-element" }, [
+              _vm._v("\n                شماره کارت"),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "text" } })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-element",
+                staticStyle: { "margin-top": "90px" }
+              },
+              [
+                _vm._v("\n                تکرار رمز عبور جدید"),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.pass2,
+                      expression: "pass2"
+                    }
+                  ],
+                  attrs: { type: "password" },
+                  domProps: { value: _vm.pass2 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.pass2 = $event.target.value
+                    }
+                  }
+                })
+              ]
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-row",
+        [
+          _c("b-col", [
+            _c("table", { staticClass: "table" }, [
+              _c("thead", { staticClass: "thead-light" }, [
+                _c("tr", { attrs: { align: "center" } }, [
+                  _c(
+                    "th",
+                    {
+                      staticStyle: { width: "500px" },
+                      attrs: { scope: "col" }
+                    },
+                    [_vm._v("آدرس")]
+                  ),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("شهر")]),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    {
+                      staticStyle: { width: "100px" },
+                      attrs: { scope: "col" }
+                    },
+                    [_vm._v("مختصات")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm._l(_vm.addresses, function(item) {
+                    return _c("tr", { attrs: { align: "center" } }, [
+                      _c("td", { staticStyle: { width: "300px" } }, [
+                        _c("div", [_vm._v(_vm._s(item.addressText))])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_c("div", [_vm._v(_vm._s(item.city))])]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticStyle: { float: "right" } }, [
+                          _vm._v(" " + _vm._s(item.lat))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticStyle: { float: "left" } }, [
+                          _vm._v(_vm._s(item.lon))
+                        ])
+                      ])
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("tr", { attrs: { align: "center" } }, [
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _c("li", {
+                        staticClass: "fa fa-plus",
+                        staticStyle: { "margin-left": "20px", color: "blue" }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.address,
+                            expression: "address"
+                          }
+                        ],
+                        staticStyle: { "border-radius": "10px" },
+                        domProps: { value: _vm.address },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.address = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.city,
+                            expression: "city"
+                          }
+                        ],
+                        staticStyle: { "border-radius": "10px" },
+                        domProps: { value: _vm.city },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.city = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _c("div", { staticStyle: { float: "right" } }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.lat,
+                              expression: "lat"
+                            }
+                          ],
+                          staticStyle: {
+                            width: "30px",
+                            "border-radius": "10px"
+                          },
+                          domProps: { value: _vm.lat },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.lat = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticStyle: { float: "left" } }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.lon,
+                              expression: "lon"
+                            }
+                          ],
+                          staticStyle: {
+                            width: "30px",
+                            "border-radius": "10px"
+                          },
+                          domProps: { value: _vm.lon },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.lon = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info mt-5",
+                staticStyle: {
+                  "margin-left": "39%",
+                  width: "250px",
+                  "border-radius": "30px",
+                  "background-color": "blue"
+                },
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.editAddress()
+                  }
+                }
+              },
+              [_vm._v("\n                ثبت آدرس جدید\n            ")]
+            )
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
